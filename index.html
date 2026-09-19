@@ -2,143 +2,1504 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <!-- خاصية ملائمة الشاشات ومنع التكبير والتصغير -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>مفاجأة خاصة لرهوفة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="شكري - متخصص تقنية معلومات ومطور برمجيات. تصميم مواقع، تطبيقات، وحلول شبكات.">
+    <meta name="keywords" content="برمجة, تطوير مواقع, تطبيقات, تقنية معلومات, شكري">
+    <meta name="author" content="شكري">
+    <title data-ar="شكري - تقنية المعلومات وتطوير البرمجيات" data-en="Shukri - IT & Software Development">شكري - تقنية المعلومات وتطوير البرمجيات</title>
     <style>
+        :root {
+            --primary-color: #0284c7;
+            --primary-dark: #0f172a;
+            --secondary-color: #16a34a;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --header-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+            --text-muted: #64748b;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #38bdf8;
+            --primary-dark: #e2e8f0;
+            --bg-light: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #e2e8f0;
+            --border-color: #334155;
+            --text-muted: #94a3b8;
+            --header-gradient: linear-gradient(135deg, #020617, #0f172a);
+            --shadow-color: rgba(0, 0, 0, 0.4);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fdf2f8;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden; /* لمنع ظهور شريط التمرير العشوائي */
-        }
-        .container {
-            background: white;
-            padding: 30px 20px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-        }
-        input {
-            padding: 12px;
-            font-size: 18px;
-            border: 2px solid #ec4899;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 200px;
-            text-align: center;
-            outline: none;
-        }
-        button {
-            margin-top: 15px;
-            padding: 12px 25px;
-            font-size: 18px;
-            background: #ec4899;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            width: 100%;
-            max-width: 200px;
-        }
-        button:active {
-            background: #db2777;
-        }
-        #gift-page {
-            display: none;
-        }
-        .gift-box {
-            font-size: 80px;
-            cursor: pointer;
-            margin: 20px 0;
-            transition: transform 0.3s;
-        }
-        .gift-box:hover {
-            transform: scale(1.1);
-        }
-        #love-message {
-            display: none;
-            font-size: 20px;
-            color: #831843;
-            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-color);
             line-height: 1.6;
-            margin-top: 15px;
+            padding: 15px;
+            padding-top: 80px;
         }
-        
-        /* تذييل الصفحة */
-        footer {
+
+        body[dir="ltr"] {
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ===== شريط التنقل ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            box-shadow: 0 2px 10px var(--shadow-color);
+            z-index: 1000;
+            padding: 12px 20px;
+        }
+
+        .navbar-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover { color: var(--primary-color); }
+
+        .nav-links a::after {
+            content: '';
             position: absolute;
-            bottom: 15px;
-            width: 100%;
-            text-align: center;
-            font-size: 14px;
-            color: #666;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s;
         }
-        footer a {
-            color: #ec4899;
+
+        body[dir="ltr"] .nav-links a::after {
+            right: auto;
+            left: 0;
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            transition: all 0.3s;
+        }
+
+        .icon-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .lang-btn {
+            width: auto;
+            padding: 0 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: bold;
+            gap: 5px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        /* ===== الترويسة ===== */
+        .header {
+            background: var(--header-gradient);
+            color: #ffffff;
+            padding: 45px 20px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px -1px var(--shadow-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .header h1 {
+            color: #38bdf8;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            position: relative;
+        }
+
+        .header-cta {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .btn-primary, .btn-outline {
+            padding: 10px 22px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: inline-block;
         }
-        footer a:hover {
-            text-decoration: underline;
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #15803d;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid #38bdf8;
+        }
+
+        .btn-outline:hover {
+            background: #38bdf8;
+            color: #0f172a;
+        }
+
+        /* ===== أزرار السوشيال في الترويسة ===== */
+        .header-socials {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header-social-link {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+        }
+
+        .header-social-link.instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .header-social-link.whatsapp {
+            background: #25d366;
+        }
+
+        .header-social-link:hover {
+            transform: translateY(-4px) scale(1.1);
+        }
+
+        /* ===== عناوين الأقسام ===== */
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            border-right: 4px solid var(--primary-color);
+            padding-right: 10px;
+            margin: 25px 0 15px 0;
+            font-weight: bold;
+        }
+
+        body[dir="ltr"] .section-title {
+            border-right: none;
+            border-left: 4px solid var(--primary-color);
+            padding-right: 0;
+            padding-left: 10px;
+        }
+
+        /* ===== الإحصائيات ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px var(--shadow-color);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        /* ===== السيرة الذاتية ===== */
+        .bio-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .bio-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .bio-avatar {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);
+            flex-shrink: 0;
+        }
+
+        .bio-info h2 {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+        }
+
+        .bio-info p {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .bio-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        /* ===== المهارات بأشرطة ===== */
+        .skills-bars {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .skill-bar-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .skill-bar-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .skill-bar-track {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+            transition: width 1.5s ease-in-out;
+        }
+
+        /* ===== شبكة الخدمات ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -5px var(--shadow-color);
+        }
+
+        .service-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        [data-theme="dark"] .service-icon {
+            background: linear-gradient(135deg, #0c4a6e, #075985);
+        }
+
+        .service-badge {
+            align-self: flex-start;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .service-badge {
+            background: #0c4a6e;
+            color: #7dd3fc;
+        }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--primary-dark);
+        }
+
+        .service-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .btn-whatsapp {
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        .btn-whatsapp:hover { background-color: #15803d; }
+
+        /* ===== آراء العملاء ===== */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 4px var(--shadow-color);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .testimonial-name {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        /* ===== الأسئلة الشائعة ===== */
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.95rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--primary-dark);
+        }
+
+        .faq-question:hover { background: var(--bg-light); }
+
+        .faq-icon {
+            transition: transform 0.3s;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            padding: 0 20px;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 20px 15px 20px;
+        }
+
+        /* ===== نموذج التواصل ===== */
+        .contact-form {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 4px var(--shadow-color);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            background: var(--bg-light);
+            color: var(--text-color);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+        }
+
+        /* ===== قسم المنشورات ===== */
+        .blog-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .post-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .post-header h3 {
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+        }
+
+        .post-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .post-body {
+            font-size: 0.92rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .share-btn {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.2s;
+        }
+
+        .share-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .comments-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .comment-item {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+
+        .comment-avatar {
+            width: 28px;
+            height: 28px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .comment-user {
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: var(--text-color);
+        }
+
+        .comment-time {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-right: auto;
+        }
+
+        body[dir="ltr"] .comment-time {
+            margin-right: 0;
+            margin-left: auto;
+        }
+
+        .comment-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+            padding-right: 36px;
+        }
+
+        body[dir="ltr"] .comment-text {
+            padding-right: 0;
+            padding-left: 36px;
+        }
+
+        .comment-form {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .comment-form input,
+        .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            background: var(--bg-light);
+            color: var(--text-color);
+        }
+
+        .comment-form textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .btn-submit {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            align-self: flex-start;
+            font-size: 0.88rem;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover { background: #0369a1; }
+
+        /* ===== زر الواتساب العائم ===== */
+        .float-whatsapp {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            width: 55px;
+            height: 55px;
+            background: #25d366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .float-whatsapp:hover {
+            background: #128c7e;
+            animation: none;
+        }
+
+        /* ===== زر العودة للأعلى ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            z-index: 999;
+            transition: opacity 0.3s;
+        }
+
+        .back-to-top.show { display: flex; }
+        .back-to-top:hover { background: #0369a1; }
+
+        /* ===== التذييل ===== */
+        .footer {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 42px;
+            height: 42px;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .social-link.instagram:hover {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-3px);
+        }
+
+        .social-link.whatsapp:hover {
+            background: #25d366;
+            color: white;
+            border-color: transparent;
+            transform: translateY(-3px);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== حركات الظهور ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== التجاوب ===== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                background: var(--card-bg);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                box-shadow: 0 4px 10px var(--shadow-color);
+                border-top: 1px solid var(--border-color);
+            }
+
+            .nav-links.open { display: flex; }
+            .menu-toggle { display: block; }
+            .form-row { grid-template-columns: 1fr; }
+            .nav-logo { font-size: 0.95rem; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 8px; padding-top: 75px; }
+            .header { padding: 30px 15px; }
+            .header h1 { font-size: 1.4rem; }
+            .btn-submit { width: 100%; }
+            .stat-number { font-size: 1.6rem; }
+            .float-whatsapp { width: 50px; height: 50px; font-size: 1.4rem; bottom: 15px; left: 15px; }
+            .back-to-top { bottom: 15px; right: 15px; }
+            .icon-btn { width: 34px; height: 34px; font-size: 0.9rem; }
+            .lang-btn { padding: 0 10px; font-size: 0.75rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- صفحة الدخول -->
-    <div id="login-page" class="container">
-        <h2 style="font-size: 20px; color: #831843; margin-bottom: 20px;">أدخلي رمز الدخول إلى قلبي ❤️</h2>
-        <input type="text" id="pass" maxlength="4" placeholder="????">
-        <br>
-        <button onclick="checkPass()">دخول</button>
-    </div>
-
-    <!-- صفحة الهدية -->
-    <div id="gift-page" class="container">
-        <h1 style="font-size: 22px; color: #831843;">مفاجأة لرهوفة الجميلة 🎁</h1>
-        <div class="gift-box" onclick="openGift()">🎁</div>
-        <p style="color: #666; font-size: 16px;">اضغطي على الهدية</p>
-        <div id="love-message">
-            <p>إلى رهوفة أغلى الناس،<br>
-            كل حرف في اسمك هو لحن لقلبي.<br>
-            أحبك أكثر مما تتخيلين! ❤️</p>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="nav-logo" data-ar="شكري 💻" data-en="Shukri 💻">شكري 💻</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about" data-ar="عني" data-en="About">عني</a></li>
+                <li><a href="#services" data-ar="الخدمات" data-en="Services">الخدمات</a></li>
+                <li><a href="#testimonials" data-ar="آراء العملاء" data-en="Testimonials">آراء العملاء</a></li>
+                <li><a href="#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a></li>
+                <li><a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="icon-btn lang-btn" id="langToggle" title="تغيير اللغة">🌐 <span id="langLabel">EN</span></button>
+                <button class="icon-btn" id="themeToggle" title="تبديل الوضع">🌙</button>
+                <button class="menu-toggle" id="menuToggle">☰</button>
+            </div>
         </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- الترويسة -->
+        <header class="header">
+            <h1 data-ar="شكري لخدمات تقنية المعلومات والحلول البرمجية" data-en="Shukri for IT Services & Software Solutions">شكري لخدمات تقنية المعلومات والحلول البرمجية</h1>
+            <p data-ar="تطوير مواقع الويب، تطبيقات برمجية، وتأمين بيئات العمل" data-en="Web Development, Software Applications & Secure Work Environments">تطوير مواقع الويب، تطبيقات برمجية، وتأمين بيئات العمل</p>
+            <div class="header-cta">
+                <a href="https://wa.me/967777696478?text=Hello%20Shukri" class="btn-primary" target="_blank" data-ar="💬 تواصل معي الآن" data-en="💬 Contact Me Now">💬 تواصل معي الآن</a>
+                <a href="#services" class="btn-outline" data-ar="📋 تعرف على الخدمات" data-en="📋 View Services">📋 تعرف على الخدمات</a>
+            </div>
+            <div class="header-socials">
+                <a href="https://instagram.com/al_gwker" target="_blank" class="header-social-link instagram" title="Instagram: @al_gwker">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+                <a href="https://wa.me/967777696478" target="_blank" class="header-social-link whatsapp" title="WhatsApp">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+            </div>
+        </header>
+
+        <!-- الإحصائيات -->
+        <section class="stats-grid reveal">
+            <div class="stat-card">
+                <span class="stat-number" data-target="5">0</span>
+                <div class="stat-label" data-ar="سنوات خبرة" data-en="Years Experience">سنوات خبرة</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" data-target="50">0</span>
+                <div class="stat-label" data-ar="مشروع مكتمل" data-en="Projects Done">مشروع مكتمل</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" data-target="40">0</span>
+                <div class="stat-label" data-ar="عميل سعيد" data-en="Happy Clients">عميل سعيد</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" data-target="100">0</span>
+                <div class="stat-label" data-ar="% رضا العملاء" data-en="% Satisfaction">% رضا العملاء</div>
+            </div>
+        </section>
+
+        <!-- السيرة الذاتية -->
+        <section id="about" class="reveal">
+            <div class="section-title" data-ar="نبذة عني (السيرة الذاتية)" data-en="About Me (Resume)">نبذة عني (السيرة الذاتية)</div>
+            <div class="bio-card">
+                <div class="bio-header">
+                    <div class="bio-avatar">ش</div>
+                    <div class="bio-info">
+                        <h2 data-ar="شكري" data-en="Shukri">شكري</h2>
+                        <p data-ar="متخصص تقنية معلومات ومطور برمجيات" data-en="IT Specialist & Software Developer">متخصص تقنية معلومات ومطور برمجيات</p>
+                    </div>
+                </div>
+                <div class="bio-details">
+                    <p data-ar="أعمل في مجال تقنية المعلومات، وأمتلك خبرة وشغفاً في بناء وتطوير برامج الكومبيوتر وتصميم مواقع الويب المتجاوبة. أركز على تقديم حلول تقنية مخصصة تخدم الأفراد والمؤسسات لرفع كفاءة العمل وتأمين البيئة البرمجية." data-en="I work in the IT field with experience and passion for building and developing computer software and designing responsive websites. I focus on delivering custom technical solutions for individuals and organizations to improve work efficiency and secure the software environment.">أعمل في مجال تقنية المعلومات، وأمتلك خبرة وشغفاً في بناء وتطوير برامج الكومبيوتر وتصميم مواقع الويب المتجاوبة. أركز على تقديم حلول تقنية مخصصة تخدم الأفراد والمؤسسات لرفع كفاءة العمل وتأمين البيئة البرمجية.</p>
+
+                    <div class="skills-bars">
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span data-ar="تطوير الويب (HTML/CSS/JS)" data-en="Web Development (HTML/CSS/JS)">تطوير الويب (HTML/CSS/JS)</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="95%"></div></div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span data-ar="تطبيقات سطح المكتب (Java)" data-en="Desktop Apps (Java)">تطبيقات سطح المكتب (Java)</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90%"></div></div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span data-ar="أنظمة الكشك (Kiosk Mode)" data-en="Kiosk Systems">أنظمة الكشك (Kiosk Mode)</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85%"></div></div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-bar-header">
+                                <span data-ar="حماية وحلول الشبكات" data-en="Security & Network Solutions">حماية وحلول الشبكات</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- الخدمات -->
+        <section id="services" class="reveal">
+            <div class="section-title" data-ar="الخدمات التقنية المتاحة" data-en="Available Technical Services">الخدمات التقنية المتاحة</div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div>
+                        <div class="service-icon">🌐</div>
+                        <span class="service-badge" data-ar="تطوير الويب" data-en="Web Development">تطوير الويب</span>
+                        <h3 data-ar="تصميم وتطوير المواقع والصفحات التعريفية" data-en="Website & Landing Page Design">تصميم وتطوير المواقع والصفحات التعريفية</h3>
+                        <p data-ar="بناء موقع خاص متجاوب مع جميع الشاشات ورفعه مباشرة على الإنترنت." data-en="Build a custom responsive website for all screens and upload it directly to the internet.">بناء موقع خاص متجاوب مع جميع الشاشات ورفعه مباشرة على الإنترنت.</p>
+                    </div>
+                    <div>
+                        <a href="https://wa.me/967777696478?text=Hello%20Shukri" class="btn-whatsapp" target="_blank" data-ar="تواصل عبر الواتساب 💬" data-en="Contact via WhatsApp 💬">تواصل عبر الواتساب 💬</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <div class="service-icon">💻</div>
+                        <span class="service-badge" data-ar="تطبيقات سطح المكتب" data-en="Desktop Apps">تطبيقات سطح المكتب</span>
+                        <h3 data-ar="صنع برامج الكومبيوتر وأنظمة الكشك (Kiosk)" data-en="Computer Software & Kiosk Systems">صنع برامج الكومبيوتر وأنظمة الكشك (Kiosk)</h3>
+                        <p data-ar="تجهيز وتأمين برامج المكتبات والموظفين لتعمل تلقائياً وتمنع التشتت بالواجهة." data-en="Prepare and secure library and employee software to run automatically and prevent UI distractions.">تجهيز وتأمين برامج المكتبات والموظفين لتعمل تلقائياً وتمنع التشتت بالواجهة.</p>
+                    </div>
+                    <div>
+                        <a href="https://wa.me/967777696478?text=Hello%20Shukri" class="btn-whatsapp" target="_blank" data-ar="تواصل عبر الواتساب 💬" data-en="Contact via WhatsApp 💬">تواصل عبر الواتساب 💬</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div>
+                        <div class="service-icon">🔒</div>
+                        <span class="service-badge" data-ar="الشبكات والأمن" data-en="Networks & Security">الشبكات والأمن</span>
+                        <h3 data-ar="استشارات وحلول الشبكات البرمجية" data-en="Network Software Solutions & Consulting">استشارات وحلول الشبكات البرمجية</h3>
+                        <p data-ar="إعداد سكربتات وتحليل واستشارات برمجية لحماية وتأمين الأنظمة والشبكات." data-en="Scripting, analysis, and software consulting for protecting and securing systems and networks.">إعداد سكربتات وتحليل واستشارات برمجية لحماية وتأمين الأنظمة والشبكات.</p>
+                    </div>
+                    <div>
+                        <a href="https://wa.me/967777696478?text=Hello%20Shukri" class="btn-whatsapp" target="_blank" data-ar="تواصل عبر الواتساب 💬" data-en="Contact via WhatsApp 💬">تواصل عبر الواتساب 💬</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- آراء العملاء -->
+        <section id="testimonials" class="reveal">
+            <div class="section-title" data-ar="آراء العملاء" data-en="Client Testimonials">آراء العملاء</div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text" data-ar="تعاملت مع الأستاذ شكري في تصميم موقع شركتنا، والنتيجة كانت رائعة. احترافية عالية والتزام بالمواعيد." data-en="I worked with Mr. Shukri on our company website design, and the result was excellent. High professionalism and on-time delivery.">تعاملت مع الأستاذ شكري في تصميم موقع شركتنا، والنتيجة كانت رائعة. احترافية عالية والتزام بالمواعيد.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">م</div>
+                        <div>
+                            <div class="testimonial-name" data-ar="محمد الحسني" data-en="Mohammed Al-Hasani">محمد الحسني</div>
+                            <div class="testimonial-role" data-ar="صاحب شركة" data-en="Business Owner">صاحب شركة</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text" data-ar="قام شكري بتطوير نظام كشك لمكتبتنا، والنظام يعمل بكفاءة عالية. شكراً على الجهد الرائع." data-en="Shukri developed a kiosk system for our library, and it works very efficiently. Thanks for the great effort.">قام شكري بتطوير نظام كشك لمكتبتنا، والنظام يعمل بكفاءة عالية. شكراً على الجهد الرائع.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">ع</div>
+                        <div>
+                            <div class="testimonial-name" data-ar="عبدالله ناصر" data-en="Abdullah Nasser">عبدالله ناصر</div>
+                            <div class="testimonial-role" data-ar="مدير مكتبة" data-en="Library Manager">مدير مكتبة</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- الأسئلة الشائعة -->
+        <section id="faq" class="reveal">
+            <div class="section-title" data-ar="الأسئلة الشائعة" data-en="Frequently Asked Questions">الأسئلة الشائعة</div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span data-ar="كم يستغرق تصميم موقع ويب كامل؟" data-en="How long does it take to design a complete website?">كم يستغرق تصميم موقع ويب كامل؟</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer" data-ar="يعتمد على حجم الموقع، عادة من 3 إلى 10 أيام عمل للمواقع المتوسطة، وقد يزيد حسب الميزات المطلوبة." data-en="It depends on the site's size, usually 3 to 10 working days for medium websites, and may increase based on required features.">يعتمد على حجم الموقع، عادة من 3 إلى 10 أيام عمل للمواقع المتوسطة، وقد يزيد حسب الميزات المطلوبة.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span data-ar="هل تقدم دعم فني بعد تسليم المشروع؟" data-en="Do you provide technical support after project delivery?">هل تقدم دعم فني بعد تسليم المشروع؟</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer" data-ar="نعم، أوفر دعماً فنياً مجانياً لمدة 30 يوماً بعد التسليم، مع إمكانية تمديد الدعم بعقد سنوي." data-en="Yes, I provide free technical support for 30 days after delivery, with the option to extend via annual contract.">نعم، أوفر دعماً فنياً مجانياً لمدة 30 يوماً بعد التسليم، مع إمكانية تمديد الدعم بعقد سنوي.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span data-ar="ما هي طرق الدفع المتاحة؟" data-en="What payment methods are available?">ما هي طرق الدفع المتاحة؟</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer" data-ar="أقبل الدفع عبر الحوالات البنكية، المحافظ الإلكترونية، أو الدفع النقدي. يتم الاتفاق على تفاصيل الدفع قبل بدء العمل." data-en="I accept bank transfers, e-wallets, or cash. Payment details are agreed before starting the work.">أقبل الدفع عبر الحوالات البنكية، المحافظ الإلكترونية، أو الدفع النقدي. يتم الاتفاق على تفاصيل الدفع قبل بدء العمل.</div>
+            </div>
+        </section>
+
+        <!-- نموذج التواصل -->
+        <section id="contact" class="reveal">
+            <div class="section-title" data-ar="تواصل معي" data-en="Contact Me">تواصل معي</div>
+            <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label data-ar="الاسم الكامل" data-en="Full Name">الاسم الكامل</label>
+                        <input type="text" id="contactName" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
+                        <input type="email" id="contactEmail" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label data-ar="نوع الخدمة" data-en="Service Type">نوع الخدمة</label>
+                        <select id="contactService">
+                            <option data-ar="تصميم موقع ويب" data-en="Website Design">تصميم موقع ويب</option>
+                            <option data-ar="تطبيق سطح مكتب" data-en="Desktop Application">تطبيق سطح مكتب</option>
+                            <option data-ar="حلول شبكات" data-en="Network Solutions">حلول شبكات</option>
+                            <option data-ar="استشارة تقنية" data-en="Technical Consultation">استشارة تقنية</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-ar="رقم الهاتف (اختياري)" data-en="Phone (Optional)">رقم الهاتف (اختياري)</label>
+                        <input type="tel" id="contactPhone">
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label data-ar="تفاصيل المشروع" data-en="Project Details">تفاصيل المشروع</label>
+                    <textarea id="contactMessage" rows="4" required style="resize: vertical;"></textarea>
+                </div>
+                <button type="submit" class="btn-submit" data-ar="إرسال عبر الواتساب 📤" data-en="Send via WhatsApp 📤">إرسال عبر الواتساب 📤</button>
+            </form>
+        </section>
+
+        <!-- قسم المنشورات -->
+        <section class="reveal">
+            <div class="section-title" data-ar="منشورات وآراء المتابعين" data-en="Posts & Reader Comments">منشورات وآراء المتابعين</div>
+
+            <div class="blog-section">
+                <div class="post-header">
+                    <div>
+                        <h3 data-ar="كيف تختار لغة البرمجة المناسبة لمشروعك؟" data-en="How to Choose the Right Programming Language for Your Project?">كيف تختار لغة البرمجة المناسبة لمشروعك؟</h3>
+                        <div class="post-meta" data-ar="تم النشر بواسطة: شكري | منذ يومين" data-en="Posted by: Shukri | 2 days ago">تم النشر بواسطة: شكري | منذ يومين</div>
+                    </div>
+                </div>
+
+                <div class="post-body">
+                    <p data-ar="اختيار لغة البرمجة يعتمد بشكل أساسي على هدف المشروع؛ لبناء موقع ويب تفاعلي يُفضل استخدام PHP أو JavaScript، بينما للأنظمة والتطبيقات ذات الأداء العالي والمستقر تُعتبر Java خياراً ممتازاً." data-en="Choosing a programming language mainly depends on your project goal; for an interactive website, PHP or JavaScript are preferred, while for high-performance, stable systems and apps, Java is an excellent choice.">اختيار لغة البرمجة يعتمد بشكل أساسي على هدف المشروع؛ لبناء موقع ويب تفاعلي يُفضل استخدام <strong>PHP</strong> أو <strong>JavaScript</strong>، بينما للأنظمة والتطبيقات ذات الأداء العالي والمستقر تُعتبر <strong>Java</strong> خياراً ممتازاً.</p>
+                    <div class="share-buttons">
+                        <a href="https://wa.me/?text=مقال%20مميز%20من%20شكري" class="share-btn" target="_blank" data-ar="📤 شارك على واتساب" data-en="📤 Share on WhatsApp">📤 شارك على واتساب</a>
+                        <a href="https://twitter.com/intent/tweet" class="share-btn" target="_blank" data-ar="🐦 شارك على تويتر" data-en="🐦 Share on Twitter">🐦 شارك على تويتر</a>
+                    </div>
+                </div>
+
+                <div class="comments-title" data-ar="التعليقات (2)" data-en="Comments (2)">التعليقات (2)</div>
+
+                <div class="comments-list" id="commentsList">
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <div class="comment-avatar">أ</div>
+                            <div class="comment-user" data-ar="أحمد صالح" data-en="Ahmed Saleh">أحمد صالح</div>
+                            <div class="comment-time" data-ar="منذ ساعة" data-en="1 hour ago">منذ ساعة</div>
+                        </div>
+                        <div class="comment-text" data-ar="مقال ممتاز! أتمنى التحدث أكثر عن تطبيقات سطح المكتب بلغة Java في المنشور القادم." data-en="Excellent article! I hope you talk more about Java desktop apps in the next post.">مقال ممتاز! أتمنى التحدث أكثر عن تطبيقات سطح المكتب بلغة Java في المنشور القادم.</div>
+                    </div>
+
+                    <div class="comment-item">
+                        <div class="comment-header">
+                            <div class="comment-avatar">م</div>
+                            <div class="comment-user" data-ar="محمد علي" data-en="Mohammed Ali">محمد علي</div>
+                            <div class="comment-time" data-ar="منذ 3 ساعات" data-en="3 hours ago">منذ 3 ساعات</div>
+                        </div>
+                        <div class="comment-text" data-ar="تصميم الموقع سلس وسريع جداً عند التصفح من الهاتف. بالتوفيق للأخ شكري!" data-en="The site is smooth and fast on mobile. Best of luck to Shukri!">تصميم الموقع سلس وسريع جداً عند التصفح من الهاتف. بالتوفيق للأخ شكري!</div>
+                    </div>
+                </div>
+
+                <form class="comment-form" id="commentForm">
+                    <input type="text" id="commentName" data-ar-placeholder="اسمك الكريم..." data-en-placeholder="Your name..." placeholder="اسمك الكريم..." required>
+                    <textarea id="commentText" data-ar-placeholder="اكتب تعليقك أو استفسارك هنا..." data-en-placeholder="Write your comment here..." placeholder="اكتب تعليقك أو استفسارك هنا..." required></textarea>
+                    <button type="submit" class="btn-submit" data-ar="نشر التعليق" data-en="Post Comment">نشر التعليق</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- التذييل -->
+        <footer class="footer">
+            <div class="footer-socials">
+                <a href="https://instagram.com/al_gwker" target="_blank" class="social-link instagram" title="Instagram: @al_gwker">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+                <a href="https://wa.me/967777696478" target="_blank" class="social-link whatsapp" title="WhatsApp">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+            </div>
+            <div class="footer-text" data-ar="© 2026 شكري - جميع الحقوق محفوظة | حساب إنستغرام: @al_gwker" data-en="© 2026 Shukri - All Rights Reserved | Instagram: @al_gwker">© 2026 شكري - جميع الحقوق محفوظة | حساب إنستغرام: @al_gwker</div>
+        </footer>
+
     </div>
 
-    <!-- الحقوق -->
-    <footer>
-        <p>جميع الحقوق محفوظة ©</p>
-        <p>تصميم وتطوير: <a href="https://wa.me/967736398023" target="_blank">فراس</a></p>
-    </footer>
+    <!-- زر الواتساب العائم -->
+    <a href="https://wa.me/967777696478" class="float-whatsapp" target="_blank" title="WhatsApp">💬</a>
+
+    <!-- زر العودة للأعلى -->
+    <button class="back-to-top" id="backToTop" title="العودة للأعلى">↑</button>
 
     <script>
-        function checkPass() {
-            let code = document.getElementById('pass').value;
-            if (code === '0852') {
-                document.getElementById('login-page').style.display = 'none';
-                document.getElementById('gift-page').style.display = 'block';
+        // ===== الوضع الليلي/النهاري =====
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggle.textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            if (current === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
             } else {
-                alert('الرمز خاطئ، حاولي مرة أخرى يا قلبي!');
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
             }
+        });
+
+        // ===== الترجمة عربي/إنجليزي =====
+        const langToggle = document.getElementById('langToggle');
+        const langLabel = document.getElementById('langLabel');
+        let currentLang = localStorage.getItem('lang') || 'ar';
+
+        function applyLanguage(lang) {
+            document.documentElement.setAttribute('lang', lang);
+            document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+            // ترجمة كل العناصر التي تحتوي على data-ar و data-en
+            document.querySelectorAll('[data-ar][data-en]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) el.textContent = text;
+            });
+
+            // ترجمة placeholders
+            document.querySelectorAll('[data-ar-placeholder][data-en-placeholder]').forEach(el => {
+                const ph = el.getAttribute('data-' + lang + '-placeholder');
+                if (ph) el.placeholder = ph;
+            });
+
+            // ترجمة عنوان الصفحة
+            const title = document.querySelector('title');
+            const titleText = title.getAttribute('data-' + lang);
+            if (titleText) title.textContent = titleText;
+
+            // تغيير نص زر اللغة
+            langLabel.textContent = lang === 'ar' ? 'EN' : 'ع';
+
+            localStorage.setItem('lang', lang);
         }
-        function openGift() {
-            document.querySelector('.gift-box').style.display = 'none';
-            document.getElementById('love-message').style.display = 'block';
-        }
+
+        // تطبيق اللغة المحفوظة عند التحميل
+        applyLanguage(currentLang);
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            applyLanguage(currentLang);
+        });
+
+        // ===== قائمة الموبايل =====
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+
+        // ===== حركات الظهور عند التمرير =====
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => revealObserver.observe(el));
+
+        // ===== عدّاد الإحصائيات =====
+        const counters = document.querySelectorAll('.stat-number');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = +el.getAttribute('data-target');
+                    let count = 0;
+                    const increment = target / 60;
+                    const update = () => {
+                        count += increment;
+                        if (count < target) {
+                            el.textContent = Math.ceil(count);
+                            requestAnimationFrame(update);
+                        } else {
+                            el.textContent = target;
+                        }
+                    };
+                    update();
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(c => counterObserver.observe(c));
+
+        // ===== أشرطة المهارات =====
+        const skillBars = document.querySelectorAll('.skill-bar-fill');
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    bar.style.width = bar.getAttribute('data-width');
+                    skillObserver.unobserve(bar);
+                }
+            });
+        }, { threshold: 0.5 });
+        skillBars.forEach(b => skillObserver.observe(b));
+
+        // ===== الأسئلة الشائعة =====
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    if (i !== item) i.classList.remove('active');
+                });
+                item.classList.toggle('active');
+            });
+        });
+
+        // ===== نموذج التعليقات =====
+        const commentForm = document.getElementById('commentForm');
+        const commentsList = document.getElementById('commentsList');
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('commentName').value.trim();
+            const text = document.getElementById('commentText').value.trim();
+            if (!name || !text) return;
+
+            const newComment = document.createElement('div');
+            newComment.className = 'comment-item';
+            const timeText = currentLang === 'ar' ? 'الآن' : 'Just now';
+            newComment.innerHTML = `
+                <div class="comment-header">
+                    <div class="comment-avatar">${name.charAt(0)}</div>
+                    <div class="comment-user">${name}</div>
+                    <div class="comment-time">${timeText}</div>
+                </div>
+                <div class="comment-text">${text}</div>
+            `;
+            commentsList.appendChild(newComment);
+            commentForm.reset();
+
+            // تحديث عدد التعليقات
+            const count = commentsList.children.length;
+            const commentsTitle = document.querySelector('.comments-title');
+            commentsTitle.textContent = currentLang === 'ar' ? `التعليقات (${count})` : `Comments (${count})`;
+        });
+
+        // ===== زر العودة للأعلى =====
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) backToTop.classList.add('show');
+            else backToTop.classList.remove('show');
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ===== نموذج التواصل (إرسال عبر الواتساب) =====
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const service = document.getElementById('contactService').value;
+            const phone = document.getElementById('contactPhone').value;
+            const message = document.getElementById('contactMessage').value;
+
+            const text = currentLang === 'ar'
+                ? `الاسم: ${name}%0aالبريد: ${email}%0aالخدمة: ${service}%0aالهاتف: ${phone || 'غير محدد'}%0aالرسالة: ${message}`
+                : `Name: ${name}%0aEmail: ${email}%0aService: ${service}%0aPhone: ${phone || 'N/A'}%0aMessage: ${message}`;
+
+            window.open(`https://wa.me/967777696478?text=${text}`, '_blank');
+        });
     </script>
+
 </body>
 </html>
-
-
